@@ -27,18 +27,27 @@
     dm_sliders_alert_reset();
     
     console.log("programar lógica de guardado");
-    console.log("tipo", $('#dm_sliders_type_1').val());
+    console.log("tipo", $("input[name='dm_sliders_type']:checked"). val());
     console.log("img", $('#dm_sliders_preview').attr("src"));
-    console.log("img id", $('#dm_sliders_image_id').attr("src"));    
+    console.log("img id", $('#dm_sliders_image_id').val());
     console.log("link", $('#dm_sliders_global_link').val());
     console.log("link target", $('#dm_sliders_global_link_target').is(":checked"));
     console.log("texto editor", $('#dm_sliders_content').val());
     console.log("boton", $('#dm_sliders_boton_texto').val());
-    console.log("boton link", $('#dm_sliders_boton_link').val());    
+    console.log("boton link", $('#dm_sliders_boton_link').val());
+    console.log("boton target", $('#dm_sliders_boton_link_target').is(":checked"));
     
     if($('#dm_sliders_image_id').val() != ''){
       var template = '\
       <div class="col-sm-3">\
+        <input type="hidden" name="_dm_sliders_type[]" value="'+$("input[name='dm_sliders_type']:checked"). val()+'" />\
+        <input type="hidden" name="_dm_sliders_image_id[]" value="'+$('#dm_sliders_image_id').attr("src")+'" />\
+        <input type="hidden" name="_dm_sliders_global_link[]" value="'+$('#dm_sliders_global_link').val()+'" />\
+        <input type="hidden" name="_dm_sliders_global_link_target[]" value="'+$('#dm_sliders_global_link_target').is(":checked")+'" />\
+        <input type="hidden" name="_dm_sliders_content[]" value="'+$('#dm_sliders_content').val()+'" />\
+        <input type="hidden" name="_dm_sliders_boton_texto[]" value="'+$('#dm_sliders_boton_texto').val()+'" />\
+        <input type="hidden" name="_dm_sliders_boton_link[]" value="'+$('#dm_sliders_boton_link').val()+'" />\
+        <input type="hidden" name="_dm_sliders_boton_link_target[]" value="'+$('#dm_sliders_boton_link_target').is(":checked")+'" />\
         <div class="card p-1">\
           <img class="card-img-top" src="'+$('#dm_sliders_preview').attr("src")+'" alt="...">\
           <div class="card-body py-2 px-1 text-center">\
@@ -47,9 +56,10 @@
           </div>\
         </div>\
       </div>';
+
       $('#dm_sliders_form-container').addClass('d-none');
       $(template).insertBefore('#dm_sliders_container_link_add');
-      $('#dm_sliders_preview').attr('src', '');
+      $('#dm_sliders_preview').attr('src', admin_url.assets_url + 'images/default.png');
       $('#dm_sliders_btn-cancel').trigger('click');
     }else{
       dm_sliders_alert("Debes seleccionar una imagen", "warning");
@@ -61,6 +71,8 @@
     if(!$('#dm_sliders_form-container').hasClass('d-none')){
       $('#dm_sliders_form-container').addClass('d-none');
     }
+
+    $('#dm_sliders_preview').attr('src', admin_url.assets_url + 'images/default.png');
   });
 
   // Listener de upload de imágenes
