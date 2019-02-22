@@ -6,6 +6,10 @@
   // Listener agregar items de lider
   $(document).on('click', '.dm_sliders_thumb_action', function(){
     switch($(this).data('action')){
+      case 'add':
+        $('#dm_sliders_form-container').removeClass('d-none');
+      break;
+
       case 'edit':
         var _index = $(this).closest('li.dm_sliders-item_container').index();
         if($('#dm_sliders_hidden_edit_index').length == 0){
@@ -41,12 +45,11 @@
 
         // Muestro el formulario
         $('#dm_sliders_form-container').removeClass('d-none');
-      break;
+      break;      
+      
       case 'delete':
         $(this).closest('li.dm_sliders-item_container').remove();
-      break;
-      case 'add':
-        $('#dm_sliders_form-container').removeClass('d-none');
+        $('#dm_sliders_btn-cancel').trigger('click');
       break;
     }
   });
