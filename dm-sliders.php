@@ -60,3 +60,8 @@ require_once(plugin_dir_path(__FILE__) . "includes/scripts.php");
  * Agrego AJAX
  */
 require_once(plugin_dir_path(__FILE__) . "includes/async.php");
+
+/**
+ * Agrego código de shortcode como columna en el listado de sliders
+ */
+require_once(plugin_dir_path(__FILE__) . "includes/columns.php");

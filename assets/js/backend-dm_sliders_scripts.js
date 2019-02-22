@@ -3,6 +3,13 @@
     $('#dm_sliders_sortable').sortable();
   });
 
+  // Listener copiar shortcode
+  $(document).on('click', '.dm_sliders_list_copy_action', function(){
+    var id_to_copy = 'dm_sliders_list_shortcode_' + $(this).data('id');
+
+    copyClipboard(id_to_copy);
+  });
+
   // Listener agregar items de lider
   $(document).on('click', '.dm_sliders_thumb_action', function(){
     switch($(this).data('action')){
@@ -208,3 +215,33 @@
     $('#dm_sliders_form_alert').attr('class', 'd-none alert');
   }
 })(jQuery);
+
+/**
+ * Copia el contenido del elemento cuyo id sea pasado como parámetro
+ */
+function copyClipboard(id_el) {
+  var elm = document.getElementById(id_el);
+  
+  if(document.body.createTextRange) {   // Internet Explorer
+    var range = document.body.createTextRange();
+    range.moveToElementText(elm);
+    range.select();
+    document.execCommand("Copy");
+    alert("Shortcode copiado");
+  }else if(window.getSelection) {       // Other browsers
+    var selection = window.getSelection();
+    var range = document.createRange();
+    range.selectNodeContents(elm);
+    selection.removeAllRanges();
+    selection.addRange(range);
+    document.execCommand("Copy");
+    alert("Shortcode copiado");
+  }
+
+  // Unselect
+  if (window.getSelection) {
+    window.getSelection().removeAllRanges();
+  } else if (document.selection) {
+    document.selection.empty();
+  }
+}

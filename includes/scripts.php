@@ -45,6 +45,13 @@ function dm_sliders_backend_scripts($hook){
         'assets_url' => plugins_url('../assets/', __FILE__)
       ));
     }    
+  }else if($hook == 'edit.php'){
+    wp_enqueue_script('dm_sliders_backend_js', plugins_url('../assets/js/backend-dm_sliders_scripts.js', __FILE__), array('jquery'), '0.0.7', true);
+
+    wp_localize_script('dm_sliders_backend_js', 'admin_url', array(
+      'ajax_url' => admin_url('admin-ajax.php'),
+      'assets_url' => plugins_url('../assets/', __FILE__)
+    ));
   }
 }
 add_action('admin_enqueue_scripts', 'dm_sliders_backend_scripts');
