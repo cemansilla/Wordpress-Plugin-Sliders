@@ -23,10 +23,6 @@ function dm_slider_shortcode( $atts ) {
   $count = count($dm_sliders_data_array);
 
   ob_start();
-  echo "dm_sliders_data_json";
-  d($dm_sliders_data_json);
-  echo "dm_sliders_data_array";
-  d($dm_sliders_data_array);
   ?>
   <header>
     <div id="dm_sliders_carousel" class="carousel slide" data-ride="carousel">
