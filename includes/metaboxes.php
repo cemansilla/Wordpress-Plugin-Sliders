@@ -2,7 +2,7 @@
 if(!defined('ABSPATH')) exit;
 
 /**
- * Agrego metabox al CPT quizes
+ * Agrego metabox al CPT sliders
  */
 function dm_sliders_add_metaboxes(){
   add_meta_box('dm_sliders_meta_box', 'Items del slider', 'dm_sliders_metaboxes', 'dm_sliders', 'normal', 'high', null);
@@ -13,54 +13,42 @@ add_action('add_meta_boxes', 'dm_sliders_add_metaboxes');
  * Contenido / formulario del CPT sliders
  */
 function dm_sliders_metaboxes($post){
-  echo "dm_sliders_metaboxes: ";
-  d($post);
-  echo "dm_sliders_slider (serializado): ";
-  $serializado = get_post_meta($post->ID, 'dm_sliders_slider', true);
-  echo esc_attr($serializado);
-  echo "<br>";
+  $dm_sliders_data_json = get_post_meta($post->ID, 'dm_sliders_slider', true);
 
-  echo "dm_sliders_slider (unserializado): ";
-  $unserializado = maybe_unserialize($serializado);
-  d($unserializado);
-  echo "<br>";
+  $dm_sliders_data_array = array();  
+  if(
+    !empty($dm_sliders_data_json) && 
+    isset($dm_sliders_data_json["dm_sliders_data"]) &&
+    is_array($dm_sliders_data_json["dm_sliders_data"])){
+      foreach($dm_sliders_data_json["dm_sliders_data"] as $k => $v){
+        $decoded = json_decode($v, true);
+        $dm_sliders_data_array[] = $decoded[0];
+      }
+  }
 
   wp_nonce_field(basename(__FILE__), 'dm_sliders_nonce');
-
-  $items = array(
-    array(
-      "img" => "sample-1.jpg"
-    ),
-    array(
-      "img" => "sample-2.jpg"
-    ),
-    array(
-      "img" => "sample-3.jpg"
-    ),
-    array(
-      "img" => "sample-1.jpg"
-    ),
-    array(
-      "img" => "sample-1.jpg"
-    )
-  );
-  $items = array();
   ?>
   <div class="container-fluid">
     <div class="row">
       <form id="dm_sliders_form">
         <!-- Items ya cargados -->
-        <?php foreach($items as $i): ?>
-        <div class="col-sm-3">
-          <div class="card p-1">
-            <img class="card-img-top" src="<?php echo plugin_dir_url(__FILE__) . "../assets/images/" . $i["img"]; ?>" alt="...">
-            <div class="card-body py-2 px-1 text-center">
-              <a href="javascript:;" class="card-link dm_sliders_thumb_action" data-action="edit"><i class="fas fa-edit"></i> Editar</a>
-              <a href="javascript:;" class="card-link dm_sliders_thumb_action" data-action="delete"><i class="fas fa-trash"></i> Borrar</a>
+        <ul id="dm_sliders_sortable">
+          <?php foreach($dm_sliders_data_array as $k => $v): ?>
+          <li class="dm_sliders-item_container">
+            <div class="col-sm-3">
+              <input type="hidden" class="_dm_sliders_data" name="_dm_sliders_data[]" value='<?php echo json_encode(array($v)); ?>' />
+
+              <div class="card p-1">
+                <img class="card-img-top" src="<?php echo $v["dm_sliders_preview"]; ?>" alt="...">
+                <div class="card-body py-2 px-1 text-center">
+                  <a href="javascript:;" class="card-link dm_sliders_thumb_action" data-action="edit"><i class="fas fa-edit"></i> Editar</a>
+                  <a href="javascript:;" class="card-link dm_sliders_thumb_action" data-action="delete"><i class="fas fa-trash"></i> Borrar</a>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <?php endforeach; ?>
+          </li>
+          <?php endforeach; ?>
+        </ul>
 
         <!-- Item de agregar nuevo -->
         <div id="dm_sliders_container_link_add" class="col-sm-3">
@@ -139,8 +127,8 @@ function dm_sliders_metaboxes($post){
           <div class="form-group">
             <div class="row">
               <div class="col-5">
-                <label for="dm_sliders_boton_texto" class="">Botón texto</label>
-                <input type="url" class="form-control" id="dm_sliders_boton_texto" name="dm_sliders_boton_texto" placeholder="PARTICIPÁ!">
+                <label for="dm_sliders_boton_text" class="">Botón texto</label>
+                <input type="text" class="form-control" id="dm_sliders_boton_text" name="dm_sliders_boton_text" placeholder="PARTICIPÁ!">
               </div>
               <div class="col-5">
                 <label for="dm_sliders_boton_link" class="">Botón link</label>
@@ -184,16 +172,8 @@ function dm_sliders_save_metaboxes($post_id, $post, $update){
   }
 
   $a_data = array(
-    "dm_sliders_type" => $_POST["_dm_sliders_type"],
-    "dm_sliders_image_id" => $_POST["_dm_sliders_image_id"],
-    "dm_sliders_global_link" => $_POST["_dm_sliders_global_link"],
-    "dm_sliders_global_link_target" => $_POST["_dm_sliders_global_link_target"],
-    "dm_sliders_content" => $_POST["_dm_sliders_content"],
-    "dm_sliders_boton_texto" => $_POST["_dm_sliders_boton_texto"],
-    "dm_sliders_boton_link" => $_POST["_dm_sliders_boton_link"],
-    "dm_sliders_boton_link_target" => $_POST["_dm_sliders_boton_link_target"]
+    "dm_sliders_data" => $_POST["_dm_sliders_data"]
   );
-
-  update_post_meta($post_id, 'dm_sliders_slider', maybe_serialize($a_data));
+  update_post_meta($post_id, 'dm_sliders_slider', ($a_data));
 }
 add_action('save_post', 'dm_sliders_save_metaboxes', 10, 3);
