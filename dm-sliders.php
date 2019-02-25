@@ -65,3 +65,8 @@ require_once(plugin_dir_path(__FILE__) . "includes/async.php");
  * Agrego código de shortcode como columna en el listado de sliders
  */
 require_once(plugin_dir_path(__FILE__) . "includes/columns.php");
+
+/**
+ * Agrego funcionalidades de submenú
+ */
+require_once(plugin_dir_path(__FILE__) . "includes/menu.php");
