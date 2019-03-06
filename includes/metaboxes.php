@@ -174,6 +174,7 @@ function dm_sliders_save_metaboxes($post_id, $post, $update){
   $a_data = array(
     "dm_sliders_data" => $_POST["_dm_sliders_data"]
   );
+
   update_post_meta($post_id, 'dm_sliders_slider', ($a_data));
 }
 add_action('save_post', 'dm_sliders_save_metaboxes', 10, 3);

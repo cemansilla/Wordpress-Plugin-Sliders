@@ -18,9 +18,17 @@ function dm_sliders_options_page_html(){
   ?>
   <div class="wrap">
     <h1>Carga de contenido de muestra</h1>
-    <div class="alert alert-warning mt-2" role="alert">
-      El siguiente proceso cargará contenido de muestra compuesto por 2 sliders de 3 items cada uno. <strong>No reemplazará nada que ya esté cargado.</strong><br>El borrado de los sliders deberá ser manual.
+
+    <div class="alert alert-info mt-2" role="alert">
+      El siguiente proceso cargará contenido de muestra compuesto por 1 slider de 3 items. <strong>No reemplazará nada que ya esté cargado.</strong><br>El borrado de los sliders deberá ser manual.
     </div>
+    <button 
+      class="btn btn-warning" 
+      type="button" 
+      id="dm_sliders_btn_load_demo_content">
+        <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+        <span class="spinner-text">Proceder</span>        
+    </button>
   </div>
   <?php
 }
