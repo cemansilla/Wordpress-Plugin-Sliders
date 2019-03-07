@@ -1,0 +1,56 @@
+#wpwrap{
+  background-color: #f1f1f1;
+}
+ul.iten-cargados{
+  position: relative;
+  display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: stretch;
+  width: 100%;
+}
+ul.iten-cargados li, div.card{
+  min-width: 180px;
+  max-width: 180px;
+  height: 180px;
+  margin: 0 5px 5px 0;
+}
+
+ul.iten-cargados li .card .img-card, div.card div.img-card{
+  position: relative;
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+}
+ul.iten-cargados li .card .img-card img, div.card div.img-card img{
+  position: absolute;
+  top: 0;
+  min-width: 100%;
+  height: 100%;
+}
+
+div#dm_sliders_form-container{
+  background-color: #f1f1f1;
+  padding: 25px 5px;
+}
+
+div#dm_sliders_form-container div.cont-tipo{
+  width: 120px;
+  height: 84px;
+  position: relative;
+  margin-right: 30px;
+}
+div#dm_sliders_form-container div.cont-tipo label{
+  position: absolute;
+  bottom: 7px;
+  left: 7px;
+  z-index: 1;
+}
+div#dm_sliders_form-container div.cont-tipo input{
+  position: absolute;
+  bottom: 7px;
+  right: 0;
+  z-index: 2;
+}

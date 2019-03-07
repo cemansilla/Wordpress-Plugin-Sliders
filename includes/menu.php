@@ -23,11 +23,11 @@ function dm_sliders_options_page_html(){
       El siguiente proceso cargará contenido de muestra compuesto por 1 slider de 3 items. <strong>No reemplazará nada que ya esté cargado.</strong><br>El borrado de los sliders deberá ser manual.
     </div>
     <button 
-      class="btn btn-warning" 
+      class="btn btn-primary" 
       type="button" 
       id="dm_sliders_btn_load_demo_content">
         <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-        <span class="spinner-text">Proceder</span>        
+        <span class="spinner-text ">Proceder</span>        
     </button>
   </div>
   <?php

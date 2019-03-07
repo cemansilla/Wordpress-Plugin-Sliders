@@ -3,6 +3,7 @@ if(!defined('ABSPATH')) exit;
 
 function dm_sliders_load_bootstrap(){
   wp_enqueue_style('bootstrap4', 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
+  wp_enqueue_style( 'style', plugins_url('../assets/css/style.css', __FILE__), array(), '1.0.0' );
   wp_enqueue_script( 'boot1','https://code.jquery.com/jquery-3.3.1.min.js', array( 'jquery' ),'',true );
   wp_enqueue_script( 'boot2','https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js', array( 'jquery' ),'',true );
   wp_enqueue_script( 'boot3','https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js', array( 'jquery' ),'',true );

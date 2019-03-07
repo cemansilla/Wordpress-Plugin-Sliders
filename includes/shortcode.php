@@ -35,7 +35,7 @@ function dm_slider_shortcode( $atts ) {
 
       <div class="carousel-inner" role="listbox">
         <?php foreach($dm_sliders_data_array as $i => $slide): ?>
-        <?php
+        <?php         
         /**
          * En este punto ya se cuenta con la info de cada item de slider
          *
@@ -67,14 +67,49 @@ function dm_slider_shortcode( $atts ) {
          * $slide['dm_sliders_boton_link_target']
          */
         ?>
-        <div class="carousel-item <?php echo ($i == 0) ? 'active' : ''; ?>" style="background-image: url('<?php echo $slide['dm_sliders_preview']; ?>')">
-          <div class="carousel-caption d-none d-md-block">
-            <!-- Contenido -->
-            <?php echo $slide['dm_sliders_content']; ?>
-
-            <!-- TODO: agregar contenido del comentario de arriba -->
+          <div class="carousel-item <?php echo ($i == 0) ? 'active' : ''; ?>" >
+            <a href="<?php echo $slide['dm_sliders_global_link']; ?>" target="<?php echo $slide['dm_sliders_global_link_target']; ?>"><img class="img-fluid" src="<?php echo $slide['dm_sliders_preview'];?>" alt=""></a>
+            <div class="carousel-caption d-none d-md-block">
+              <!-- Contenido -->
+              <?php 
+                if ($slide['dm_sliders_type'] == 1) {
+                  ?>
+                  <!-- Slide de estandar  -->
+                  <div class="row">
+                    <div class="col-12">
+                        <?php echo $slide['dm_sliders_content']; ?>
+                        <a class="btn_slide" href="<?php echo $slide['dm_sliders_boton_link']; ?>" target="<?php echo $slide['dm_sliders_boton_link_target']; ?>"><?php echo $slide['dm_sliders_boton_text'];  ?></a>
+                    </div>
+                  </div>
+                <?php }else if ($slide['dm_sliders_type'] == 2){
+                  ?>
+                  <!-- Slide de 2 columnas  -->
+                  <div class="row">
+                    <div class="col-6">
+                        <?php echo $slide['dm_sliders_content']; ?>
+                        <a class="btn_slide" href="<?php echo $slide['dm_sliders_boton_link']; ?>" target="<?php echo $slide['dm_sliders_boton_link_target']; ?>"><?php echo $slide['dm_sliders_boton_text'];  ?></a>
+                    </div>
+                    <div class="col-6"></div>
+                  </div>
+                <?php }else if($slide['dm_sliders_type'] == 3){
+                  ?>
+                  <!-- Slide de 3 columnas  -->
+                  <div class="row">
+                    <div class="col-4">
+                      <?php echo $slide['dm_sliders_content']; ?>
+                      <a class="btn_slide" href="<?php echo $slide['dm_sliders_boton_link']; ?>" target="<?php echo $slide['dm_sliders_boton_link_target']; ?>"><?php echo $slide['dm_sliders_boton_text'];  ?></a>
+                    </div>
+                    <div class="col-4"></div>
+                    <div class="col-4"></div>
+                  </div>
+                <?php }
+              ?>
+              <?php echo $slide['dm_sliders_content']; ?>                                      
+                  
+              <!-- TODO: agregar contenido del comentario de arriba -->
+            </div>
           </div>
-        </div>
+       
         <?php endforeach; ?>
       </div>
 
