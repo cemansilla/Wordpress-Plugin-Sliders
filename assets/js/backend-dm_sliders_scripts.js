@@ -33,6 +33,25 @@
         // Radio tipo
         $('input:radio[name=dm_sliders_type]').filter('[value='+hidden_value_arr[0].dm_sliders_type+']').prop('checked', true);
 
+        // Radio subtipo
+        if(!$('.subtypes-container').hasClass('d-none')){
+          $('.subtypes-container').addClass('d-none');
+        }
+
+        if(!$('.subtype-2-cols').hasClass('d-none')){
+          $('.subtype-2-cols').addClass('d-none');
+        }
+
+        if(!$('.subtype-3-cols').hasClass('d-none')){
+          $('.subtype-3-cols').addClass('d-none');
+        }
+
+        if(hidden_value_arr[0].dm_sliders_type == 2 || hidden_value_arr[0].dm_sliders_type == 3){
+          $('.subtype-'+hidden_value_arr[0].dm_sliders_type+'-cols').removeClass('d-none');
+          $('#dm_sliders_subtype_'+hidden_value_arr[0].dm_sliders_type+'_'+hidden_value_arr[0].dm_sliders_subtype).prop('checked', true);
+          $('.subtypes-container').removeClass('d-none');
+        }
+
         // Info imagen
         $('#dm_sliders_preview').attr('src', hidden_value_arr[0].dm_sliders_preview);
         $('#dm_sliders_image_id').val(hidden_value_arr[0].dm_sliders_image_id);
@@ -67,7 +86,7 @@
     e.preventDefault();
   });
 
-  // Listener cancelar agregado de item de slider
+  // Listener guardar agregado de item de slider
   $(document).on('click', '#dm_sliders_btn-save', function(e){
     e.preventDefault();
 
@@ -75,7 +94,8 @@
 
     var _item_data = [];
     _item_data.push({
-      dm_sliders_type: $("input[name='dm_sliders_type']:checked"). val(),
+      dm_sliders_type: $("input[name='dm_sliders_type']:checked").val(),
+      dm_sliders_subtype: $("input[name='dm_sliders_subtype']:checked").val(),
       dm_sliders_preview: $('#dm_sliders_preview').attr("src"),
       dm_sliders_image_id: $('#dm_sliders_image_id').val(),
       dm_sliders_global_link: $('#dm_sliders_global_link').val(),
@@ -88,21 +108,20 @@
     
     if($('#dm_sliders_image_id').val() != ''){
       var template = "\
-      <li class='dm_sliders-item_container'>\
-        <div class='col-sm-3'>\
-          <input type='hidden' class='_dm_sliders_data' name='_dm_sliders_data[]' value='"+JSON.stringify(_item_data)+"' />\
-          <div class='card p-1'>\
-            <img class='card-img-top' src='"+$('#dm_sliders_preview').attr("src")+"' alt='...'>\
-            <div class='card-body py-2 px-1 text-center'>\
-              <a href='javascript:;' class='card-link dm_sliders_thumb_action' data-action='edit'><i class='fas fa-edit'></i> Editar</a>\
-              <a href='javascript:;' class='card-link dm_sliders_thumb_action' data-action='delete'><i class='fas fa-trash'></i> Borrar</a>\
-            </div>\
+      <li class='dm_sliders-item_container ui-sortable-handle'>\
+        <input type='hidden' class='_dm_sliders_data' name='_dm_sliders_data[]' value='"+JSON.stringify(_item_data)+"' />\
+        <div class='card p-1'>\
+          <div class='img-card'>\
+            <img class='img-miniatura' src='"+$('#dm_sliders_preview').attr("src")+"' alt='...'>\
+          </div>\
+          <div class='card-body py-2 px-1 text-center'>\
+            <a href='javascript:;' class='card-link dm_sliders_thumb_action' data-action='edit'><i class='fas fa-edit'></i> Editar</a>\
+            <a href='javascript:;' class='card-link dm_sliders_thumb_action' data-action='delete'><i class='fas fa-trash'></i> Borrar</a>\
           </div>\
         </div>\
       </li>";
 
       if($('#dm_sliders_hidden_edit_index').length == 0){
-        //$(template).insertBefore('#dm_sliders_container_link_add');
         $('#dm_sliders_sortable').append(template);
       }else{
         $('li.dm_sliders-item_container:eq('+$('#dm_sliders_hidden_edit_index').val()+')').replaceWith($(template));
@@ -124,6 +143,38 @@
     }
 
     $('#dm_sliders_preview').attr('src', admin_url.assets_url + 'images/default.png');
+  });
+
+  $(document).on('change', 'input[name=dm_sliders_type]', function(){
+    switch($(this).val()){
+      case "2":
+        if(!$('.subtype-3-cols').hasClass('d-none')){
+          $('.subtype-3-cols').addClass('d-none');
+        }
+
+        $('#dm_sliders_subtype_2_1').prop('checked', true);
+
+        $('.subtype-2-cols').removeClass('d-none');
+        $('.subtypes-container').removeClass('d-none');
+      break;
+
+      case "3":
+        if(!$('.subtype-2-cols').hasClass('d-none')){
+          $('.subtype-2-cols').addClass('d-none');
+        }
+
+        $('#dm_sliders_subtype_3_1').prop('checked', true);
+
+        $('.subtype-3-cols').removeClass('d-none');
+        $('.subtypes-container').removeClass('d-none');
+      break;
+
+      default:
+        if(!$('subtypes-container').hasClass('d-none')){
+          $('.subtypes-container').addClass('d-none');
+        }
+      break;
+    }
   });
 
   // Listener de upload de imágenes

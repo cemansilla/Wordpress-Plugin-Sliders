@@ -102,42 +102,42 @@ function dm_sliders_metaboxes($post){
           </div>
           <div class="row">
             <div class="col-1"></div>
-            <div class="col-11">
-                <div class="form-check-inline cont-tipo">
-                  <img src="<?php echo plugin_dir_url(__FILE__) . "../assets/images/2columnas-left.png"; ?>" alt="">
-                  <input class="form-check-input" type="radio" name="dm_sliders_type" id="dm_sliders_type_1" value="1" checked>
-                  <label class="form-check-label" for="dm_sliders_type_1">
-                      Left                    
-                  </label>
-                </div>
-                <div class="form-check-inline cont-tipo">
-                  <img src="<?php echo plugin_dir_url(__FILE__) . "../assets/images/2columnas-right.png"; ?>" alt="">
-                  <input class="form-check-input" type="radio" name="dm_sliders_type" id="dm_sliders_type_1" value="1" checked>
-                  <label class="form-check-label" for="dm_sliders_type_1">
-                      Right                    
-                  </label>
-                </div>
-                <div class="form-check-inline cont-tipo">
-                  <img src="<?php echo plugin_dir_url(__FILE__) . "../assets/images/3columnas-left.png"; ?>" alt="">
-                  <input class="form-check-input" type="radio" name="dm_sliders_type" id="dm_sliders_type_1" value="1" checked>
-                  <label class="form-check-label" for="dm_sliders_type_1">
-                      Left                    
-                  </label>
-                </div>
-                <div class="form-check-inline cont-tipo">
-                  <img src="<?php echo plugin_dir_url(__FILE__) . "../assets/images/3columnas-center.png"; ?>" alt="">
-                  <input class="form-check-input" type="radio" name="dm_sliders_type" id="dm_sliders_type_1" value="1" checked>
-                  <label class="form-check-label" for="dm_sliders_type_1">
-                      Center                    
-                  </label>
-                </div>
-                <div class="form-check-inline cont-tipo">
-                  <img src="<?php echo plugin_dir_url(__FILE__) . "../assets/images/3columnas-right.png"; ?>" alt="">
-                  <input class="form-check-input" type="radio" name="dm_sliders_type" id="dm_sliders_type_1" value="1" checked>
-                  <label class="form-check-label" for="dm_sliders_type_1">
-                      Right                    
-                  </label>
-                </div>
+            <div class="col-11 subtypes-container d-none">
+              <div class="form-check-inline cont-tipo subtype-2-cols d-none">
+                <img src="<?php echo plugin_dir_url(__FILE__) . "../assets/images/2columnas-left.png"; ?>" alt="">
+                <input class="form-check-input" type="radio" name="dm_sliders_subtype" id="dm_sliders_subtype_2_1" value="1">
+                <label class="form-check-label" for="dm_sliders_subtype_2_1">
+                    Left                    
+                </label>
+              </div>
+              <div class="form-check-inline cont-tipo subtype-2-cols d-none">
+                <img src="<?php echo plugin_dir_url(__FILE__) . "../assets/images/2columnas-right.png"; ?>" alt="">
+                <input class="form-check-input" type="radio" name="dm_sliders_subtype" id="dm_sliders_subtype_2_2" value="2">
+                <label class="form-check-label" for="dm_sliders_subtype_2_2">
+                    Right                    
+                </label>
+              </div>
+              <div class="form-check-inline cont-tipo subtype-3-cols d-none">
+                <img src="<?php echo plugin_dir_url(__FILE__) . "../assets/images/3columnas-left.png"; ?>" alt="">
+                <input class="form-check-input" type="radio" name="dm_sliders_subtype" id="dm_sliders_subtype_3_1" value="1">
+                <label class="form-check-label" for="dm_sliders_subtype_3_1">
+                    Left                    
+                </label>
+              </div>
+              <div class="form-check-inline cont-tipo subtype-3-cols d-none">
+                <img src="<?php echo plugin_dir_url(__FILE__) . "../assets/images/3columnas-center.png"; ?>" alt="">
+                <input class="form-check-input" type="radio" name="dm_sliders_subtype" id="dm_sliders_subtype_3_2" value="2">
+                <label class="form-check-label" for="dm_sliders_subtype_3_2">
+                    Center                    
+                </label>
+              </div>
+              <div class="form-check-inline cont-tipo subtype-3-cols d-none">
+                <img src="<?php echo plugin_dir_url(__FILE__) . "../assets/images/3columnas-right.png"; ?>" alt="">
+                <input class="form-check-input" type="radio" name="dm_sliders_subtype" id="dm_sliders_subtype_3_3" value="3">
+                <label class="form-check-label" for="dm_sliders_subtype_3_3">
+                    Right                    
+                </label>
+              </div>
             </div>
           </div>
         </div>
