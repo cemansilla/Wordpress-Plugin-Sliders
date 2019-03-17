@@ -35,7 +35,10 @@ function dm_slider_shortcode( $atts ) {
 
       <div class="carousel-inner" role="listbox">
         <?php foreach($dm_sliders_data_array as $i => $slide): ?>
-        <?php         
+        <?php
+        // Proceso contenido de editor para contemplar formatos, shortcodes, etc
+        $slide['dm_sliders_content_filter'] = apply_filters('the_content', $slide['dm_sliders_content']);
+
         /**
          * En este punto ya se cuenta con la info de cada item de slider
          *
@@ -60,6 +63,9 @@ function dm_slider_shortcode( $atts ) {
          * Contenido de editor
          * $slide['dm_sliders_content']
          * 
+         * Contenido de editor procesado
+         * $slide['dm_sliders_content_filter']
+         * 
          * Botón texto
          * $slide['dm_sliders_boton_text']
          * 
@@ -80,7 +86,7 @@ function dm_slider_shortcode( $atts ) {
                   <!-- Slide de estandar  -->
                   <div class="row">
                     <div class="col-12">
-                        <?php echo $slide['dm_sliders_content']; ?>
+                        <?php echo $slide['dm_sliders_content_filter']; ?>
                         <a class="btn_slide" href="<?php echo $slide['dm_sliders_boton_link']; ?>" target="<?php echo $slide['dm_sliders_boton_link_target']; ?>"><?php echo $slide['dm_sliders_boton_text'];  ?></a>
                     </div>
                   </div>
@@ -93,7 +99,7 @@ function dm_slider_shortcode( $atts ) {
                       // No hay subtipo almacenado o el subtipo corresponde a la izquierda
                       ?>
                       <div class="col-6">
-                        <?php echo $slide['dm_sliders_content']; ?>
+                        <?php echo $slide['dm_sliders_content_filter']; ?>
                         <a class="btn_slide" href="<?php echo $slide['dm_sliders_boton_link']; ?>" target="<?php echo $slide['dm_sliders_boton_link_target']; ?>"><?php echo $slide['dm_sliders_boton_text'];  ?></a>
                       </div>
                       <div class="col-6"></div>
@@ -102,7 +108,7 @@ function dm_slider_shortcode( $atts ) {
                       ?>
                       <div class="col-6"></div>
                       <div class="col-6">
-                        <?php echo $slide['dm_sliders_content']; ?>
+                        <?php echo $slide['dm_sliders_content_filter']; ?>
                         <a class="btn_slide" href="<?php echo $slide['dm_sliders_boton_link']; ?>" target="<?php echo $slide['dm_sliders_boton_link_target']; ?>"><?php echo $slide['dm_sliders_boton_text'];  ?></a>
                       </div>                      
                       <?php
@@ -118,7 +124,7 @@ function dm_slider_shortcode( $atts ) {
                       // No hay subtipo almacenado
                       ?>
                       <div class="col-4">
-                        <?php echo $slide['dm_sliders_content']; ?>
+                        <?php echo $slide['dm_sliders_content_filter']; ?>
                         <a class="btn_slide" href="<?php echo $slide['dm_sliders_boton_link']; ?>" target="<?php echo $slide['dm_sliders_boton_link_target']; ?>"><?php echo $slide['dm_sliders_boton_text'];  ?></a>
                       </div>
                       <div class="col-4"></div>
@@ -130,7 +136,7 @@ function dm_slider_shortcode( $atts ) {
                           ?>
                           <div class="col-4"></div>
                           <div class="col-4">
-                            <?php echo $slide['dm_sliders_content']; ?>
+                            <?php echo $slide['dm_sliders_content_filter']; ?>
                             <a class="btn_slide" href="<?php echo $slide['dm_sliders_boton_link']; ?>" target="<?php echo $slide['dm_sliders_boton_link_target']; ?>"><?php echo $slide['dm_sliders_boton_text'];  ?></a>
                           </div>                          
                           <div class="col-4"></div>
@@ -142,7 +148,7 @@ function dm_slider_shortcode( $atts ) {
                           <div class="col-4"></div>
                           <div class="col-4"></div>
                           <div class="col-4">
-                            <?php echo $slide['dm_sliders_content']; ?>
+                            <?php echo $slide['dm_sliders_content_filter']; ?>
                             <a class="btn_slide" href="<?php echo $slide['dm_sliders_boton_link']; ?>" target="<?php echo $slide['dm_sliders_boton_link_target']; ?>"><?php echo $slide['dm_sliders_boton_text'];  ?></a>
                           </div>
                           <?php
@@ -151,7 +157,7 @@ function dm_slider_shortcode( $atts ) {
                         default:
                           ?>
                           <div class="col-4">
-                            <?php echo $slide['dm_sliders_content']; ?>
+                            <?php echo $slide['dm_sliders_content_filter']; ?>
                             <a class="btn_slide" href="<?php echo $slide['dm_sliders_boton_link']; ?>" target="<?php echo $slide['dm_sliders_boton_link_target']; ?>"><?php echo $slide['dm_sliders_boton_text'];  ?></a>
                           </div>
                           <div class="col-4"></div>
@@ -164,9 +170,6 @@ function dm_slider_shortcode( $atts ) {
                   </div>
                 <?php }
               ?>
-              <?php echo $slide['dm_sliders_content']; ?>                                      
-                  
-              <!-- TODO: agregar contenido del comentario de arriba -->
             </div>
           </div>
        
