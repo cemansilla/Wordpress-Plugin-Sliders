@@ -42,6 +42,9 @@ function dm_slider_shortcode( $atts ) {
          * Tipo: Estandar | 2 columnas | 3 columnas
          * $slide['dm_sliders_type']
          * 
+         * * Subtipo, depende del tipo
+         * $slide['dm_sliders_subtype']
+         * 
          * Imagen
          * $slide['dm_sliders_preview']
          * 
@@ -85,22 +88,79 @@ function dm_slider_shortcode( $atts ) {
                   ?>
                   <!-- Slide de 2 columnas  -->
                   <div class="row">
-                    <div class="col-6">
+                    <?php
+                    if(!isset($slide['dm_sliders_subtype']) || $slide['dm_sliders_subtype'] == "1"){
+                      // No hay subtipo almacenado o el subtipo corresponde a la izquierda
+                      ?>
+                      <div class="col-6">
                         <?php echo $slide['dm_sliders_content']; ?>
                         <a class="btn_slide" href="<?php echo $slide['dm_sliders_boton_link']; ?>" target="<?php echo $slide['dm_sliders_boton_link_target']; ?>"><?php echo $slide['dm_sliders_boton_text'];  ?></a>
-                    </div>
-                    <div class="col-6"></div>
+                      </div>
+                      <div class="col-6"></div>
+                      <?php
+                    }else{
+                      ?>
+                      <div class="col-6"></div>
+                      <div class="col-6">
+                        <?php echo $slide['dm_sliders_content']; ?>
+                        <a class="btn_slide" href="<?php echo $slide['dm_sliders_boton_link']; ?>" target="<?php echo $slide['dm_sliders_boton_link_target']; ?>"><?php echo $slide['dm_sliders_boton_text'];  ?></a>
+                      </div>                      
+                      <?php
+                    }
+                    ?>                    
                   </div>
                 <?php }else if($slide['dm_sliders_type'] == 3){
                   ?>
                   <!-- Slide de 3 columnas  -->
                   <div class="row">
-                    <div class="col-4">
-                      <?php echo $slide['dm_sliders_content']; ?>
-                      <a class="btn_slide" href="<?php echo $slide['dm_sliders_boton_link']; ?>" target="<?php echo $slide['dm_sliders_boton_link_target']; ?>"><?php echo $slide['dm_sliders_boton_text'];  ?></a>
-                    </div>
-                    <div class="col-4"></div>
-                    <div class="col-4"></div>
+                    <?php
+                    if(!isset($slide['dm_sliders_subtype'])){
+                      // No hay subtipo almacenado
+                      ?>
+                      <div class="col-4">
+                        <?php echo $slide['dm_sliders_content']; ?>
+                        <a class="btn_slide" href="<?php echo $slide['dm_sliders_boton_link']; ?>" target="<?php echo $slide['dm_sliders_boton_link_target']; ?>"><?php echo $slide['dm_sliders_boton_text'];  ?></a>
+                      </div>
+                      <div class="col-4"></div>
+                      <div class="col-4"></div>
+                      <?php
+                    }else{
+                      switch($slide['dm_sliders_subtype']){
+                        case "2":
+                          ?>
+                          <div class="col-4"></div>
+                          <div class="col-4">
+                            <?php echo $slide['dm_sliders_content']; ?>
+                            <a class="btn_slide" href="<?php echo $slide['dm_sliders_boton_link']; ?>" target="<?php echo $slide['dm_sliders_boton_link_target']; ?>"><?php echo $slide['dm_sliders_boton_text'];  ?></a>
+                          </div>                          
+                          <div class="col-4"></div>
+                          <?php
+                        break;
+
+                        case "3":
+                          ?>                          
+                          <div class="col-4"></div>
+                          <div class="col-4"></div>
+                          <div class="col-4">
+                            <?php echo $slide['dm_sliders_content']; ?>
+                            <a class="btn_slide" href="<?php echo $slide['dm_sliders_boton_link']; ?>" target="<?php echo $slide['dm_sliders_boton_link_target']; ?>"><?php echo $slide['dm_sliders_boton_text'];  ?></a>
+                          </div>
+                          <?php
+                        break;
+
+                        default:
+                          ?>
+                          <div class="col-4">
+                            <?php echo $slide['dm_sliders_content']; ?>
+                            <a class="btn_slide" href="<?php echo $slide['dm_sliders_boton_link']; ?>" target="<?php echo $slide['dm_sliders_boton_link_target']; ?>"><?php echo $slide['dm_sliders_boton_text'];  ?></a>
+                          </div>
+                          <div class="col-4"></div>
+                          <div class="col-4"></div>
+                          <?php
+                        break;
+                      }
+                    }
+                    ?>                    
                   </div>
                 <?php }
               ?>
